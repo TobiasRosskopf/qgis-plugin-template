@@ -47,8 +47,9 @@ def ensureDependencies():
             print module.__path__, dstPath
             if module.__path__ == dstPath:
                 dstVersion = module.__version__
-                srcModule = imp.load_source(packageName, srcPath + "/__init__.py")
+                srcModule = imp.load_source("tempmodulename", srcPath + "/__init__.py")
                 srcVersion = srcModule.__version__
+                del sys.modules["tempmodulename"]
                 print srcVersion, dstVersion
                 if srcVersion > dstVersion:
                     update = True
@@ -60,8 +61,11 @@ def ensureDependencies():
         if update:
             shutils.rmtree(dstPath)
             shutil.copytree(srcPath, dstPath)
-            module = imp.load_source(packageName, dstPath +  "/__init__.py")
-            reload(module)
+        
+        if packageName in sys.modules:
+        	del sys.modules[packageName]
+        module = imp.load_source(packageName, dstPath +  "/__init__.py")
+        #reload(module)
         
     ensureQgisCommons()
 
@@ -87,6 +91,10 @@ def ensureQgisCommons():
     if update:
         shutils.rmtree(qgiscommonDstPath)
         shutil.copytree(qgiscommonSrcPath, qgiscommonDstPath)
-        module = imp.load_source("qgiscommons", qgiscommonDstPath +  "/__init__.py")
-        reload(module)
+    
+    if packageName in sys.modules:
+       	del sys.modules["qgiscommons"]
+    
+    module = imp.load_source("qgiscommons", qgiscommonDstPath +  "/__init__.py")
+    #reload(module)
         
