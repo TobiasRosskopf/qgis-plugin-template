@@ -67,6 +67,12 @@ def main():
     src = tmpCommonsPath / "lib-qgis-commons-master" / "qgiscommons"
     src.copytree(dst.abspath())
     tmpCommonsPath.rmtree()
+    r = requests.get("https://api.github.com/repos/boundlessgeo/lib-qgis-commons/git/refs/heads/master")
+    commmitUrl = r.json()["object"]["url"]
+    r = requests.get(commitUrl)
+    versionFile = path(__file__).dirname() / "version.json"
+    with open(versionFile, "w") as f:
+        f.write(r.text)
     '''
     else:
         commons = ""

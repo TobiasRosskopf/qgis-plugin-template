@@ -72,7 +72,7 @@ def setup(options):
 
 def read_requirements():
     '''return a list of runtime and list of test requirements'''
-    lines = open('requirements.txt').readlines()
+    lines = open('[pluginshortname]/requirements.txt').readlines()
     lines = [ l for l in [ l.strip() for l in lines] if l ]
     divider = '# test requirements'
     try:
