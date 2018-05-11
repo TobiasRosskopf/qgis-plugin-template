@@ -34,7 +34,7 @@ from extlibs.qgiscommons2.settings import readSettings
 from extlibs.qgiscommons2.gui.settings import addSettingsMenu, removeSettingsMenu
 from extlibs.qgiscommons2.gui import addAboutMenu, removeAboutMenu, addHelpMenu, removeHelpMenu
 
-class [pluginclassname]:
+class [pluginclassname](object):
     def __init__(self, iface):
         self.iface = iface
         try:
