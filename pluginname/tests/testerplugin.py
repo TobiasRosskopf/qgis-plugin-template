@@ -39,9 +39,7 @@ def pluginSuite():
     return suite
 
 def unitTests():
-    _tests = []
-    _tests.extend(pluginSuite())
-    return _tests
+    return list(pluginSuite())
 
 # run all tests, this function is automatically called by the travis CI
 # from the qgis-testing-environment-docker system

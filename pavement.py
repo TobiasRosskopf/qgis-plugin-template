@@ -280,7 +280,7 @@ def pylint(args):
         error('pylint not found! Run "paver install_devtools".')
         sys.exit(1)
 
-    if not 'rcfile' in args:
+    if 'rcfile' not in args:
         args.append('--rcfile=pylintrc')
 
     args.append(options.plugin.source_dir)
